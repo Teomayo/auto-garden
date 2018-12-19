@@ -13,6 +13,14 @@ void setup() {
 	pinMode(greenLED, OUTPUT);
 }
 
+// air: 255
+// dry soil: > 150
+// moist soil: 80 - 150
+// wet soil: < 80
+// in terms of outputValue
+
+
+
 // the loop routine runs over and over again forever:
 void loop() {
 	// read the input on analog pin 0:
@@ -24,13 +32,18 @@ void loop() {
 	Serial.print("\n Output Value: ");
 	Serial.print(outputValue);
 
-	if (outputValue < 150) {
+	if (outputValue < 80) {
 		// Switching LED's based off threshold
 		digitalWrite(redLED, HIGH);
-		digitalWrite(greenLED, LOW);
-	} else {
+		digitalWrite(greenLED, HIGH);
+		Serial.println("\n TOO WET");
+	} else if (outputValue > 80 & outputValue < 150) {
 		digitalWrite(greenLED, HIGH);
 		digitalWrite(redLED, LOW);
+		Serial.println("\n PERFECT");
+	} else {
+		digitalWrite(greenLED, LOW);
+		digitalWrite(redLED, HIGH);
 		Serial.println("\n NEEDS WATERING");
 	}
 

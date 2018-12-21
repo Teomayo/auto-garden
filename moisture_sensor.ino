@@ -5,12 +5,38 @@ const int redLED = 9;
 const int greenLED = 10;
 
 
+// self calibrating ints
+bool dryRead = 0;
+bool wetRead = 0;
+
 void setup() {
 	// initialize serial communication at 9600 bits per second:
 	Serial.begin(9600);
 	// initializes pins as outputs
 	pinMode(redLED, OUTPUT);
 	pinMode(greenLED, OUTPUT);
+	
+	// initialize sequence... need to add error function if intialize sequence doesnt complete
+	digitalWrite(greenLED, HIGH);
+	delay(150);
+	digitalWrite(greenLED, LOW);
+	digitalWrite(redLED, HIGH);
+	delay(150);
+	digitalWrite(greenLED, HIGH);
+
+	// self calibration sequence
+	Serial.print("Place sensor in dry soil and wait for reading");
+	// sensorValue = analogRead(analogInPin);
+	// Serial.print(sensorValue);
+	if (Serial.available() > 0) {
+        // read the incoming byte:
+        dryRead = Serial.read();
+        // say what you got:
+        Serial.print("Dry Reading: ");
+        Serial.println(dryRead);
+	}
+	
+
 }
 
 // air: 255

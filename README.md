@@ -1,4 +1,7 @@
 # auto-garden
+
 Using Arduino to trigger automatic watering of plants
 
-## Will Fill Soon
+## Reason
+
+Creating a calibratable device for constant feeback on state of garden / plants.
